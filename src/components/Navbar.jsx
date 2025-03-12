@@ -10,13 +10,14 @@ const navItems = ["Nexus", "Vault", "Prologue", "About", "Contact"];
 
 const NavBar = () => {
   // State for toggling audio and visual indicator
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-  const [isIndicatorActive, setIsIndicatorActive] = useState(false);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(true);
+  const [isIndicatorActive, setIsIndicatorActive] = useState(true);
 
   // Refs for audio and navigation container
   const audioElementRef = useRef(null);
   const navContainerRef = useRef(null);
 
+  
   const { y: currentScrollY } = useWindowScroll();
   const [isNavVisible, setIsNavVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -26,7 +27,7 @@ const NavBar = () => {
     setIsAudioPlaying((prev) => !prev);
     setIsIndicatorActive((prev) => !prev);
   };
-
+ 
   // Manage audio playback
   useEffect(() => {
     if (isAudioPlaying) {
@@ -54,6 +55,21 @@ const NavBar = () => {
     setLastScrollY(currentScrollY);
   }, [currentScrollY, lastScrollY]);
 
+  useEffect(() => {
+    const handleFirstInteraction = () => {
+      if (isAudioPlaying) {
+        audioElementRef.current.play();
+      }
+      document.removeEventListener("click", handleFirstInteraction);
+    };
+  
+    document.addEventListener("click", handleFirstInteraction);
+  
+    return () => {
+      document.removeEventListener("click", handleFirstInteraction);
+    };
+  }, []);
+  
   useEffect(() => {
     gsap.to(navContainerRef.current, {
       y: isNavVisible ? 0 : -100,
@@ -104,6 +120,7 @@ const NavBar = () => {
                 className="hidden"
                 src="/audio/loop.mp3"
                 loop
+                
               />
               {[1, 2, 3, 4].map((bar) => (
                 <div
