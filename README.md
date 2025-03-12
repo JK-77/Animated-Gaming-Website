@@ -1,5 +1,5 @@
 ## <a name="introduction">🤖 Introduction</a>
-A Gaming Wesite featuring scroll-triggered animations, geometric transitions, and engaging video storytelling. Learn how to deliver a luxurious, modern feel, focusing on engaging UI/UX and smooth responsiveness
+A Gaming Wesite featuring scroll-triggered animations, geometric transitions, and engaging video storytelling. Learned how to deliver a luxurious, modern feel, focusing on engaging UI/UX and smooth responsiveness
 
 ## <a name="features">🔋 Features</a>
 
